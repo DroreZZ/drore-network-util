@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drore.cloud.tdp.entity.DeviceStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.drore.cloud.tdp.entity.DeviceStatus" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="devicetype" property="devicetype" jdbcType="VARCHAR" />
+    <result column="isconnect" property="isconnect" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="cron" property="cron" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ip, devicetype, isconnect, updatetime, cron
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_status
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByIp" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from device_status
+    where ip = #{ip,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByType" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from device_status
+    where devicetype = #{devicetype,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from device_status
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device_status
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.drore.cloud.tdp.entity.DeviceStatus" >
+    insert into device_status (id, ip, devicetype, 
+      isconnect, updatetime, cron
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{devicetype,jdbcType=VARCHAR}, 
+      #{isconnect,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{cron,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.drore.cloud.tdp.entity.DeviceStatus" >
+    insert into device_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="devicetype != null" >
+        devicetype,
+      </if>
+      <if test="isconnect != null" >
+        isconnect,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="cron != null" >
+        cron,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetype != null" >
+        #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="isconnect != null" >
+        #{isconnect,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cron != null" >
+        #{cron,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drore.cloud.tdp.entity.DeviceStatus" >
+    update device_status
+    <set >
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetype != null" >
+        devicetype = #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="isconnect != null" >
+        isconnect = #{isconnect,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cron != null" >
+        cron = #{cron,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="java.lang.String" >
+    update device_status
+    set ip = #{ip,jdbcType=VARCHAR},
+      devicetype = #{devicetype,jdbcType=VARCHAR},
+      isconnect = #{isconnect,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      cron = #{cron,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
